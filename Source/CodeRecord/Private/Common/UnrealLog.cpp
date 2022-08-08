@@ -32,11 +32,16 @@ void AUnrealLog::BeginPlay()
 	*/
 	UE_LOG(LogTemp, Log, TEXT("UE_LOG: Hello World!"));
 
-	// TimeHandle模拟delay
-	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [&]()
+	// TimeHandle模拟delay,须在endplay中clear，否则切换关卡时会崩溃
+	GetWorld()->GetTimerManager().SetTimer(MyTimerHandle, [&]()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("此文本将在执行后 8 秒出现在控制台中"))
-		GetWorld()->GetTimerManager().ClearTimer(TimerHandle);
+		GetWorld()->GetTimerManager().ClearTimer(MyTimerHandle);
 	}, 8, false);
+}
+
+void AUnrealLog::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+	GetWorld()->GetTimerManager().ClearTimer(MyTimerHandle);
 }
