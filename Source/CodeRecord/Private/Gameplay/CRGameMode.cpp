@@ -3,6 +3,7 @@
 
 #include "Gameplay/CRGameMode.h"
 #include "Gameplay/CRFPCaracter.h"
+#include "Gameplay/CRHUD.h"
 #include "Gameplay/CRPlayerController.h"
 #include "Gameplay/CRWorldSubsystem.h"
 
@@ -10,6 +11,7 @@ ACRGameMode::ACRGameMode()
 {
 	DefaultPawnClass = ACRFPCaracter::StaticClass();
 	PlayerControllerClass = ACRPlayerController::StaticClass();
+	HUDClass = ACRHUD::StaticClass();
 	
 }
 
